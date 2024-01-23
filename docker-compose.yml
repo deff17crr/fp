@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  php:
+    container_name: fp_php
+    build:
+      context: .
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./:/var/www/php
+    depends_on:
+      - db
+
+  db:
+    container_name: fp_db
+    image: mysql:8.1
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password5fp
+      MYSQL_DATABASE: database
+      MYSQL_USER: user5fp
+      MYSQL_PASSWORD: password5fp
+    ports:
+      - '4306:3306'
